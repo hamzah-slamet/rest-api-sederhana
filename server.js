@@ -173,6 +173,18 @@ app.delete("/api/expense/:id", (req, res, next) => {
          res.json({"message":"deleted", changes: this.changes})
    });
 })
+app.delete("/api/buku/:id", (req, res, next) => {
+   db.run(
+      'DELETE FROM buku WHERE id = ?',
+      req.params.id,
+      function (err, result) {
+         if (err){
+            res.status(400).json({"error": res.message})
+            return;
+         }
+         res.json({"message":"deleted", changes: this.changes})
+   });
+})
 
 app.use(function(req, res){
    res.status(404);
